@@ -1,61 +1,57 @@
 # MetForge
 
-MetForge is a lightweight AI-agent workflow kit for atmospheric science and
-scientific Python projects. It provides repository conventions, agent
-instructions, and reusable skills for data processing, plotting, writing,
-reviewing, and auditing research workflows.
+MetForge is a lightweight AI-agent workflow kit for atmospheric science: it helps researchers do **less coding and more thinking** by giving agents reusable instructions, skills, and folder conventions while scientists keep responsibility for questions, assumptions, interpretation, and evidence.
 
-MetForge is designed for **less coding and more thinking**. The goal is not to
-replace scientists. It helps researchers spend less time on repetitive coding
-and more time on scientific judgment: asking better questions, checking
-assumptions, interpreting diagnostics, and deciding what evidence is convincing.
+## Getting Started With Codex
 
-The project is intentionally small. It does not include private research
-artifacts, datasets, generated figures, or project-specific scripts.
+Install Node.js and npm first. On many systems you can check them with:
 
-## What Is Included
+```bash
+node --version
+npm --version
+```
 
-- `AGENTS.md`: simple operating rules for Codex-assisted work.
-- `.codex/`: reusable Codex agent and skill definitions.
-- `code/`: placeholders for scripts, notebooks, source code, and tests.
-- `configs/`: optional configuration files.
-- `data/`: local data placeholders, ignored by git except `.gitkeep` files.
-- `output/`: generated figures, logs, and temporary files, ignored by git.
-- `docs/templates/`: generic documentation templates.
+Install the Codex CLI:
 
-## Download And Installation
+```bash
+npm install -g @openai/codex
+```
 
-Use MetForge as a starting template for a new research-agent workspace.
+Download MetForge and enter the project:
 
 ```bash
 git clone https://github.com/yuanruichen/MetForge.git
 cd MetForge
+```
+
+Optional Python setup for the small `metforge` path helpers:
+
+```bash
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -e .
 ```
 
-If you only want the instructions and folder layout, cloning the repository is
-enough. The editable Python install is only needed if you want to import the
-small `metforge` path helpers from scripts or tests.
-
-Optional development tools:
+Optional development check:
 
 ```bash
 python -m pip install -e ".[dev]"
 python -m pytest code/tests
 ```
 
-## Getting Started With Codex
+Start Codex from the repository root:
 
-Codex can read `AGENTS.md` and the `.codex/` folder to understand how this
-repository should be operated. A practical first session looks like this:
+```bash
+codex
+```
+
+A practical first prompt:
 
 ```text
-Read AGENTS.md first. I want to analyze data under data/raw/, write derived
-outputs to data/processed/, save figures to output/figures/, and keep all paths
-repo-relative. Before coding, state assumptions and define a small verification
-check.
+Read AGENTS.md first. Use this repository as a scientific workflow workspace.
+Keep all paths repo-relative, write data outputs to data/processed/, figures to
+output/figures/, logs to output/logs/, and define a small verification check
+before coding.
 ```
 
 Useful task prompts:
@@ -75,29 +71,9 @@ Use the auditor agent to review the code changes for bugs, unsafe paths, missing
 tests, and reproducibility problems before final delivery.
 ```
 
-## Using Claude Or Other AI Agents
-
-MetForge is not limited to Codex. For Claude, Cursor, Continue, Aider, or other
-agent tools, start by giving the agent the same operating context:
-
-```text
-Read AGENTS.md and follow it as the repository policy. Use repo-relative paths.
-Do not commit data or generated outputs. Keep changes small, state assumptions,
-and verify with the smallest relevant check.
-```
-
-Then point the agent to the skill that matches the work:
-
-- Data processing: `.codex/skills/data-process/SKILL.md`
-- Plotting: `.codex/skills/plot/SKILL.md`
-- Figure review: `.codex/skills/figure-audit/SKILL.md`
-- Writing: `.codex/skills/writing/SKILL.md`
-- Literature review: `.codex/skills/lit-review/SKILL.md`
-- Simplicity and review discipline: `.codex/skills/karpathy-guidelines/SKILL.md`
-
-For tools without native skill support, paste the relevant `SKILL.md` content
-into the chat before asking the agent to work. Treat the AI as a careful coding
-and documentation assistant; the scientific decisions remain yours.
+Claude, Cursor, Continue, Aider, and other AI-agent tools can also use MetForge:
+ask them to read `AGENTS.md`, follow the repo-relative path rules, and use the
+relevant `.codex/skills/*/SKILL.md` file as task-specific guidance.
 
 ## Repository Layout
 
@@ -123,14 +99,16 @@ and documentation assistant; the scientific decisions remain yours.
     └── tmp/
 ```
 
-## Basic Use
+### What Is Included
 
-1. Put external or symlinked input data under `data/raw/`.
-2. Write reusable code under `code/src/`.
-3. Put generated scripts under `code/scripts/archive/<task>/`.
-4. Write derived datasets to `data/processed/`.
-5. Write figures, logs, and temporary files under `output/`.
-6. Keep all paths repo-relative.
+- `AGENTS.md`: simple operating rules for AI-agent-assisted work.
+- `.codex/agents/`: specialist agent definitions, including `auditor` for code review.
+- `.codex/skills/`: reusable task guidance for data processing, plotting, writing, review, and literature work.
+- `code/`: placeholders for scripts, notebooks, source code, and tests.
+- `configs/`: optional configuration files.
+- `data/`: local data placeholders, ignored by git except `.gitkeep` files.
+- `output/`: generated figures, logs, and temporary files, ignored by git.
+- `docs/templates/`: generic documentation templates.
 
 ## License
 
