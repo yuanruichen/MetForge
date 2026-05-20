@@ -1,8 +1,8 @@
+<h1 align="center">MetForge -- Research Agents for Atmospheric Science</h1>
+
 <p align="center">
   <img src="docs/assets/metforge_title_clean_vector.svg" alt="MetForge -- Research Agents for Atmospheric Science" width="860">
 </p>
-
-<h1 align="center">MetForge -- Research Agents for Atmospheric Science</h1>
 
 <p align="center">
   <a href="https://github.com/yuanruichen/MetForge/releases"><img alt="release" src="https://img.shields.io/badge/release-v2026.5.18-orange"></a>
