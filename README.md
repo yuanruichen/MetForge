@@ -5,7 +5,7 @@
 <h1 align="center">MetForge -- Research Agents for Atmospheric Science</h1>
 
 <p align="center">
-  <a href="https://github.com/yuanruichen/MetForge/releases"><img alt="release" src="https://img.shields.io/badge/release-v0.1.0-orange"></a>
+  <a href="https://github.com/yuanruichen/MetForge/releases"><img alt="release" src="https://img.shields.io/badge/release-v2026.5.18-orange"></a>
   <a href="https://opensource.org/license/mit"><img alt="license" src="https://img.shields.io/badge/license-MIT-black"></a>
 </p>
 
