@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/metforge_title_true_vector_trace.svg" alt="MetForge -- Research Agents for Atmospheric Science" width="760">
+  <img src="docs/assets/metforge_title_clean_vector.svg" alt="MetForge -- Research Agents for Atmospheric Science" width="760">
 </p>
 
 <h1 align="center">MetForge -- Research Agents for Atmospheric Science</h1>
