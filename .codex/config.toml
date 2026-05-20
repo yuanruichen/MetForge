@@ -16,3 +16,7 @@ config_file = "agents/plotter.toml"
 [agents.orchestrator]
 description = "Coordinates multi-step scientific workflows and checks deliverables."
 config_file = "agents/orchestrator.toml"
+
+[agents.auditor]
+description = "Reviews code changes for bugs, unsafe paths, missing tests, reproducibility risks, and overcomplication."
+config_file = "agents/auditor.toml"
