@@ -1,12 +1,8 @@
 <p align="center">
-  <img src="docs/assets/metforge-icon.svg" alt="MetForge icon" width="150">
+  <img src="docs/assets/metforge.png" alt="MetForge -- Research Agents for Atmospheric Science" width="760">
 </p>
 
 <h1 align="center">MetForge -- Research Agents for Atmospheric Science</h1>
-
-<p align="center">
-  <img src="docs/assets/metforge-title.svg" alt="MetForge title figure" width="620">
-</p>
 
 <p align="center">
   <img alt="version" src="https://img.shields.io/badge/version-0.1.0-orange">
@@ -27,6 +23,8 @@ codex
 
 ## Quick Start
 
+In this first prompt, you ask the agent to read the project rules, respect the repository layout, keep outputs reproducible, and verify the smallest useful result before making larger changes. This gives new users a clear starting contract without needing to understand agent internals.
+
 ```text
 Read AGENTS.md first. Use this repository as a scientific workflow workspace.
 Keep all paths repo-relative, write data outputs to data/processed/, figures to
@@ -46,36 +44,24 @@ before coding.
 
 ```text
 .
-├── AGENTS.md
+├── AGENTS.md              Simple operating rules for AI-assisted atmospheric workflows.
 ├── .codex/
-│   ├── agents/
-│   └── skills/
+│   ├── agents/            Specialist agents, including auditor for code supervision.
+│   └── skills/            Reusable guidance for data, plots, writing, audit, and review.
 ├── code/
-│   ├── scripts/
-│   ├── src/
-│   └── tests/
-├── configs/
+│   ├── scripts/           Generated or reusable workflow scripts.
+│   ├── src/               Shared project code.
+│   └── tests/             Focused checks for reusable code and workflows.
+├── configs/               Optional YAML/TOML configuration files.
 ├── data/
-│   ├── raw/
-│   └── processed/
+│   ├── raw/               Local input data placeholders; real data stays untracked.
+│   └── processed/         Derived datasets created by project workflows.
 ├── docs/
-│   ├── assets/
-│   └── templates/
-└── output/
-    ├── figures/
-    ├── logs/
-    └── tmp/
+│   ├── assets/            README images and public visual assets.
+│   └── templates/         Generic report and workflow templates.
+├── output/
+│   ├── figures/           Final PNG/PDF figures.
+│   ├── logs/              Run logs and execution notes.
+│   └── tmp/               Repo-local temporary files.
+└── LICENSE                MIT license.
 ```
-
-### What Is Included
-
-- `AGENTS.md`: simple operating rules for AI-agent-assisted atmospheric science workflows.
-- `.codex/agents/`: specialist agent definitions, including `auditor` for code review.
-- `.codex/skills/`: reusable task guidance for data processing, plotting, figure audit, writing, literature review, and coding discipline.
-- `code/`: placeholders for generated scripts, notebooks, reusable source code, and tests.
-- `configs/`: optional configuration files.
-- `data/`: local data placeholders, ignored by git except `.gitkeep` files.
-- `docs/assets/`: README images and public visual assets.
-- `docs/templates/`: generic documentation templates.
-- `output/`: generated figures, logs, and temporary files, ignored by git.
-- `LICENSE`: MIT license.
