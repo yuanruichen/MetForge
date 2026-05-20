@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/metforge.png" alt="MetForge -- Research Agents for Atmospheric Science" width="760">
+  <img src="docs/assets/metforge_title_selected_embedded.svg" alt="MetForge -- Research Agents for Atmospheric Science" width="760">
 </p>
 
 <h1 align="center">MetForge -- Research Agents for Atmospheric Science</h1>
@@ -13,11 +13,12 @@ MetForge is a lightweight AI-agent workflow kit for atmospheric science. It help
 
 ## Install
 
-Install Codex CLI with npm, enter your MetForge project directory, and start Codex:
+Clone MetForge, install Codex CLI with npm, enter the project directory, and start Codex:
 
 ```bash
+git clone https://github.com/yuanruichen/MetForge.git
+cd MetForge
 npm install -g @openai/codex
-cd /path/to/MetForge
 codex
 ```
 
@@ -39,6 +40,14 @@ before coding.
 - `writing`: concise scientific reports, figure captions, interpretation notes, and open research questions grounded in diagnostics.
 - `lit-review`: source-grounded literature synthesis that separates source claims from interpretation and identifies useful gaps.
 - `auditor`: code supervision for bugs, unsafe paths, data-loss risk, missing checks, reproducibility gaps, and overcomplication.
+
+## Workflow
+
+A typical MetForge run starts by using `lit-review` to collect context and open questions, then `interview-me` to turn a research idea into a concrete task. After that, ask the agent to make a plan, run `data-process` for reproducible datasets, use `plot` plus `figure-audit` for figures, and call `auditor` to supervise code quality, path safety, and verification before treating results as reliable.
+
+```text
+lit-review -> interview-me -> plan -> data-process -> plot + figure-audit -> auditor
+```
 
 ## Layout
 
@@ -65,3 +74,7 @@ before coding.
 │   └── tmp/               Repo-local temporary files.
 └── LICENSE                MIT license.
 ```
+
+## Reference
+
+- [pedrohcgs/claude-code-my-workflow](https://github.com/pedrohcgs/claude-code-my-workflow)
