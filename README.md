@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="docs/assets/metforge_title_clean_vector.svg" alt="MetForge -- Research Agents for Atmospheric Science" width="760">
+  <img src="docs/assets/metforge_title_clean_vector.svg" alt="MetForge -- Research Agents for Atmospheric Science" width="860">
 </p>
 
 <h1 align="center">MetForge -- Research Agents for Atmospheric Science</h1>
 
 <p align="center">
-  <img alt="version" src="https://img.shields.io/badge/version-0.1.0-orange">
-  <img alt="license" src="https://img.shields.io/badge/license-MIT-black">
+  <a href="https://github.com/yuanruichen/MetForge/releases"><img alt="release" src="https://img.shields.io/badge/release-v0.1.0-orange"></a>
+  <a href="https://opensource.org/license/mit"><img alt="license" src="https://img.shields.io/badge/license-MIT-black"></a>
 </p>
 
 MetForge is a lightweight AI-agent workflow kit for atmospheric science. It helps researchers do **less coding and more thinking** by giving agents reusable instructions, atmospheric workflow skills, and clean folder conventions while scientists keep responsibility for questions, assumptions, interpretation, and evidence.
