@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Environments
+.env
+.venv/
+venv/
+env/
+
+# Editors and OS files
+*.swp
+*.swo
+.DS_Store
+
+# Large/local scientific data
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+*.nc
+*.nc4
+*.grib
+*.grb
+*.zarr/
+
+# Generated outputs
+output/figures/*
+output/logs/*
+output/tmp/*
+!output/figures/.gitkeep
+!output/logs/.gitkeep
+!output/tmp/.gitkeep
+
+# Node artifacts occasionally produced by slide/report tooling
+node_modules/
+package-lock.json
