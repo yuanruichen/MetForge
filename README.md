@@ -1,4 +1,4 @@
-<h1 align="left">MetForge -- Research Agents for Atmospheric Science</h1>
+<h1 align="left">MetForge -- AI Workflow for Atmospheric Science</h1>
 
 <p align="center">
   <img src="docs/assets/metforge_title_clean_vector.svg" alt="MetForge -- Research Agents for Atmospheric Science" width="860">
