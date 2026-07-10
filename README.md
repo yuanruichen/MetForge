@@ -5,21 +5,37 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/yuanruichen/MetForge/releases/latest"><img alt="release" src="https://img.shields.io/badge/release-v2026.7.10-orange"></a>
   <a href="https://opensource.org/license/mit"><img alt="license" src="https://img.shields.io/badge/license-MIT-black"></a>
   <img alt="Codex" src="https://img.shields.io/badge/agent-Codex-111111">
 </p>
 
+<p align="center">
+  English · <a href="README_ZH.md">简体中文</a>
+</p>
+
 MetForge is a small collection of reusable skills for atmospheric-science work. It adds domain judgment for acquiring data, building scientific figures, and diagnosing atmospheric-model experiments while leaving planning, coding, tool use, and context management to the host agent.
 
-The previous all-in-one workflow is preserved on the [`workflow`](https://github.com/yuanruichen/MetForge/tree/workflow) branch. The default `main` branch contains the lightweight skill edition.
+## Quick Start
+
+After installation, describe the scientific task naturally or name a skill explicitly. These prompts can be copied directly:
+
+| Scenario | Prompt |
+|---|---|
+| Download reanalysis data | `Use $metforge-data to download ERA5 hourly u and v at 850 hPa for 10°S–10°N, 80°E–180°E during DJFM 2000–2020. Validate one month before scaling up.` |
+| Inspect and prepare local data | `Use $metforge-data to inspect these NetCDF files, verify coordinates, units, calendar, and missing values, then design a memory-safe xarray preprocessing script.` |
+| Design an atmospheric figure | `Use $metforge-figure to turn these MJO composite fields into a clear longitude–time figure with consistent scales, units, and propagation guides.` |
+| Audit an existing figure | `Use $metforge-figure to audit this multi-panel map for scientific comparability, color normalization, labels, projection artifacts, and export quality.` |
+| Diagnose a dynamical-core test | `Use $metforge-analysis to determine why RMS error grows in this balanced-flow test and propose the smallest experiment that separates spatial imbalance from a growing computational mode.` |
+| Combine analysis and visualization | `Use $metforge-analysis to evaluate these resolution, timestep, domain, and MPI experiments. Use $metforge-figure only for the diagnostics needed to support the conclusion.` |
 
 ## Skills
 
 | Skill | Use it for | Example |
 |---|---|---|
-| [`metforge-data`](skills/metforge-data/SKILL.md) | Find, download, subset, validate, and document atmospheric datasets | “Use `metforge-data` to download ERA5 hourly winds for this domain.” |
-| [`metforge-figure`](skills/metforge-figure/SKILL.md) | Design, create, revise, and audit atmospheric-science figures | “Use `metforge-figure` to turn these balance-test outputs into a publication-ready comparison.” |
-| [`metforge-analysis`](skills/metforge-analysis/SKILL.md) | Diagnose dynamical-core tests, numerical experiments, budgets, balance, conservation, and error growth | “Use `metforge-analysis` to determine why the balanced-flow experiment drifts.” |
+| [`metforge-data`](skills/metforge-data/SKILL.md) | Find, download, subset, validate, and document atmospheric datasets | “Use `$metforge-data` to download ERA5 hourly winds for this domain.” |
+| [`metforge-figure`](skills/metforge-figure/SKILL.md) | Design, create, revise, and audit atmospheric-science figures | “Use `$metforge-figure` to turn these balance-test outputs into a publication-ready comparison.” |
+| [`metforge-analysis`](skills/metforge-analysis/SKILL.md) | Diagnose dynamical-core tests, numerical experiments, budgets, balance, conservation, and error growth | “Use `$metforge-analysis` to determine why the balanced-flow experiment drifts.” |
 
 Each directory under `skills/` is an independent installable unit. The skills may cooperate, but none requires a central orchestrator.
 
