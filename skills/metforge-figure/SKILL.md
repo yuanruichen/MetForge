@@ -16,6 +16,17 @@ Treat each figure as a visual scientific argument. Define what it must show, ren
 5. Render at final or representative size. Open the actual output and audit it with [references/qa-checklist.md](references/qa-checklist.md).
 6. Fix high-impact scientific or readability failures, rerender, and reinspect. Stop polishing when the contract is satisfied.
 
+## Execution mode and processing record
+
+Before rendering, inspect data size, memory needs, expected runtime, available CPUs, whether `sbatch`/Slurm is available, whether the session is already inside a Slurm job, and existing project conventions.
+
+- Render directly for ordinary figures and small validation subsets that fit safely in the current session.
+- Use Slurm or the site's scheduler when figure preparation requires large aggregations, many files, ensemble processing, high-resolution rasterization, or work unsuitable for a login node.
+- Do not guess scheduler account, partition, walltime, modules, or paths. Reuse validated project configuration.
+- For submitted work, capture the job script, job ID, resources, environment, stdout/stderr paths, and terminal status.
+
+After every completed data-preparation call, render/export, or audit-revision cycle, append a record to the project's existing log/provenance location. If none exists, use `output/logs/YYYYMMDD-HHMM-<task>.md`. Record inputs, software environment, direct/Slurm decision, commands or script, figure contract, transformations, output files, visual checks, deviations, and status. Never record credentials or secrets. If files cannot be written, return the same record explicitly in the response.
+
 ## Hard scientific rules
 
 - Label variables and units; state period, season/sample, domain, and diagnostic definition.
@@ -45,5 +56,6 @@ Return the figure, source code, and a short audit note covering:
 - transformations and statistical overlays
 - visual checks performed on the exported file
 - remaining uncertainty or limitations
+- processing record, including scheduler job IDs when used
 
-If analysis rather than visualization is the main unresolved task, hand the evidence back to `metforge-analysis` instead of inventing a stronger interpretation.
+If scientific calculation rather than visualization is unresolved, use `metforge-analysis`. If the question is why a model test fails, use `metforge-model-diagnose` instead of inventing a stronger interpretation.

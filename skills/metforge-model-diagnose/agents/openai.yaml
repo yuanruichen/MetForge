@@ -1,0 +1,4 @@
+interface:
+  display_name: "MetForge Model Diagnose"
+  short_description: "Diagnose dynamical-core and model-test failures"
+  default_prompt: "Use $metforge-model-diagnose to diagnose this atmospheric-model experiment and identify the next decisive test."

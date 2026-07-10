@@ -1,75 +1,61 @@
 ---
 name: metforge-analysis
-description: Analyze and diagnose atmospheric dynamics experiments and numerical-model tests. Use for dynamical-core evaluation, idealized cases, balanced flow, hydrostatic rest, density currents, advection, gravity/acoustic waves, mountain waves, baroclinic instability, conservation and budget closure, error growth, convergence, timestep/resolution/domain/MPI sensitivity, solver comparisons, and physical-consistency checks. Also use when Codex must decide which metric or experiment will distinguish numerical error, configuration error, expected discretization behavior, and genuine physical response.
+description: Perform reproducible atmospheric-science calculations and statistical diagnostics. Use when Codex needs to calculate established or custom climate indices, derive meteorological variables, compute trends, detrend or filter time series, perform EOF/PCA, regression, correlation, composites, bootstrap or significance tests, or build coordinate-aware xarray workflows from NetCDF/GRIB/Zarr data. Prefer validated implementations from MetPy, xarray, SciPy, statsmodels, xclim, xeofs/eofs, xskillscore, or another established package before implementing formulas manually. Not for diagnosing why a numerical model or dynamical-core test fails; use metforge-model-diagnose for that.
 ---
 
 # MetForge Analysis
 
-Turn model output into a falsifiable diagnosis. Prefer the next decisive check over a long catalog of generic plots.
+Turn atmospheric data into a traceable scientific diagnostic. Make the mathematical definition, sampling assumptions, units, execution mode, and validation visible.
 
-## Diagnostic workflow
+## Analysis contract
 
-1. State the test contract:
-   - property or mechanism being tested
-   - expected solution, symmetry, invariant, or benchmark
-   - control and changed factor
-   - diagnostic time window and success criterion
-   - observation that would falsify the working explanation
-2. Inventory the actual run configuration and outputs. Compare namelists, compiler/precision, solver, grid, timestep, domain, boundary conditions, physics, diffusion, filters, and decomposition before interpreting differences.
-3. Establish the reference. Prefer an analytic solution, converged/high-resolution run, published benchmark, or internally consistent control. Do not call one arbitrary run “truth” without qualification.
-4. Climb the diagnostic ladder below. Stop when the evidence isolates the failure or when the next step requires new data.
-5. Classify each result as expected, numerically suspicious, physically inconsistent, configuration-dependent, or inconclusive.
-6. Produce an evidence table and recommend one next experiment with the largest discrimination value.
+Before computing, establish:
 
-## Diagnostic ladder
+- scientific quantity or hypothesis
+- exact formula, published definition, or package function
+- variables, units, coordinates, domain, levels, period, season, and baseline
+- weighting, anomaly, standardization, missing-data, and event-selection rules
+- output variables, dimensions, units, metadata, and acceptance checks
 
-### 1. Integrity
+Do not silently choose among competing index definitions. For a named index, recover the authoritative definition and identify any required reference EOFs, climatology, or external coefficients.
 
-Check file completeness, coordinates, units, time cadence, NaN/Inf, extrema, restart continuity, and whether the intended code path actually ran.
+## Computation workflow
 
-### 2. Invariants and equilibrium
+1. Inspect files, coordinates, units, calendar, chunking, missing values, and existing project code.
+2. Choose an established implementation before writing formulas:
+   - use MetPy with unit-aware inputs for supported meteorological diagnostics
+   - use xarray for labeled reductions, grouping, rolling, resampling, and alignment
+   - use SciPy/statsmodels for filters and statistical models
+   - use xclim for supported climate indices and xeofs/eofs for EOF analysis
+   - use xskillscore or established statistical libraries for supported metrics
+3. Read [references/indices-and-diagnostics.md](references/indices-and-diagnostics.md), [references/trends-and-filtering.md](references/trends-and-filtering.md), or [references/statistical-methods.md](references/statistical-methods.md) as the task requires.
+4. Validate the definition on a small subset or synthetic case with a known result.
+5. Select direct execution or a scheduler using the rules below, then run the smallest valid calculation before scaling out.
+6. Validate dimensions, coordinates, units, numeric ranges, sample counts, missing-data propagation, and at least one independent or limiting-case check.
+7. Save self-describing outputs and append an execution record after each completed computation stage.
 
-Check mass, tracer mass, energy or energy-like quantities, hydrostatic/geostrophic balance residuals, symmetry, uniform-state preservation, and boundary fluxes as appropriate.
+## Scientific safeguards
 
-### 3. Error magnitude and growth
+- Preserve units and coordinate metadata; quantify any loss during format conversion.
+- Apply area or mass weighting where the diagnostic requires it.
+- Keep preprocessing order explicit. Detrending, anomaly removal, filtering, standardization, and compositing are not interchangeable.
+- Do not concatenate separated seasons and then apply a continuous time filter.
+- Distinguish regression maps from correlation maps and regression coefficients from composite anomalies.
+- Account for serial dependence, multiple testing, and event overlap when they affect inference.
+- Treat EOF sign as arbitrary and document weighting, normalization, missing mask, training period, and projection method.
+- Never replace a package function with a hand-written approximation only to avoid understanding its assumptions.
 
-Use more than extrema. Select metrics from [references/diagnostic-metrics.md](references/diagnostic-metrics.md), including weighted bias, RMS/L2, maximum norm, drift rate, relative error, pattern correlation, phase displacement, and conservation residual.
+## Execution mode and processing record
 
-### 4. Structure
+Before running code, inspect the current environment: available CPUs and memory, data volume and chunking, expected runtime, whether `sbatch`/Slurm is available, whether the session is already inside a Slurm job, and existing project conventions.
 
-Examine the error field, cross-flow components, vertical structure, spectra, wavenumber content, propagation speed, fronts, and symmetry breaking. Scalar norms can miss compensating or phase-shifted errors.
+- Run directly for metadata inspection, subset validation, interactive exploration, and calculations that fit safely within the current session.
+- Use Slurm or the site's scheduler for expensive multi-file calculations, parameter sweeps, memory-heavy operations, or work that should not run on a login node.
+- Do not invent account, partition, walltime, or module settings. Infer them from existing scripts/configuration or request the missing value.
+- For submitted work, capture the job script, job ID, resources, environment activation, stdout/stderr paths, and terminal status.
 
-### 5. Controlled sensitivity
-
-Change one factor at a time: resolution, timestep, domain size, diffusion/filter, precision, MPI decomposition, solver tolerance, or boundary treatment. Keep physical time and output sampling comparable.
-
-### 6. Mechanism
-
-Connect the failure to a term, operator, solver stage, boundary exchange, coordinate metric, or coupling pathway. Use tendencies and residual budgets; do not infer mechanism from spatial resemblance alone.
-
-## Numerical-core principles
-
-- Distinguish truncation error, round-off accumulation, iterative-solver error, and configuration differences.
-- A result invariant to MPI decomposition but sensitive to resolution suggests a numerical-property issue rather than a parallel nondeterminism issue; confirm with field-level differences and precision tests.
-- Timestep convergence requires a sufficiently accurate spatial reference, while spatial convergence requires temporal error to be controlled.
-- Long integrations reveal drift but can mix growth, phase error, and nonlinear adjustment. Include early-time tendencies and growth regimes.
-- Zero initial tendency does not rule out a later imbalance; inspect forcing/residual terms and the first resolvable error mode.
-- Use physically scaled and area/volume-weighted norms when grids or domains differ.
-- Read [references/numerical-core-tests.md](references/numerical-core-tests.md) when selecting or interpreting an idealized benchmark.
-
-## Skill boundaries
-
-- Use `metforge-data` only when external data acquisition or dataset preparation is a central missing step.
-- Use `metforge-figure` when a diagnostic needs a visual argument or an existing figure must be audited.
-- Do not invoke a hidden end-to-end pipeline. Keep the current hypothesis, input, output, and acceptance check visible.
+After every concrete compute call or completed batch stage, append a record to the project's existing log/provenance location. If none exists, use `output/logs/YYYYMMDD-HHMM-<task>.md`. Record inputs, software environment, direct/Slurm decision, commands or script, parameters, outputs, validation results, deviations, and status. Never record credentials or secrets. If files cannot be written, return the same record explicitly in the response.
 
 ## Handoff
 
-Return:
-
-- tested hypothesis and reference
-- configuration differences
-- evidence table with metric definitions
-- strongest supported diagnosis and alternatives
-- unresolved uncertainty
-- one next experiment and the result that would discriminate among explanations
+Return the calculation definition, code or script, outputs, validation evidence, statistical caveats, and the processing record. Use `metforge-figure` only when a visual result is needed and `metforge-model-diagnose` only when the question concerns model failure or numerical behavior.

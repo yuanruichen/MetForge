@@ -26,6 +26,17 @@ Obtain the smallest scientifically sufficient dataset, preserve the source produ
 6. Validate the sample, then scale out. Use lazy xarray/dask operations for large collections and reduce before materializing arrays.
 7. Record provenance. Follow [references/dataset-contract.md](references/dataset-contract.md) for the manifest and handoff fields.
 
+## Execution mode and processing record
+
+Before downloading or preprocessing, inspect the current machine, available memory/storage, data volume, network/access constraints, whether `sbatch`/Slurm is available, whether the session is already inside a Slurm job, and existing project conventions.
+
+- Run metadata inspection, one-file validation, and small downloads directly when they fit safely in the current session.
+- Use the site's scheduler for expensive multi-file preprocessing or long transformations. Use a transfer/data node rather than a compute node when site policy or network access requires it.
+- Do not guess Slurm account, partition, walltime, modules, or storage paths. Infer them from existing project scripts/configuration or request the missing value.
+- For submitted work, capture the job script, job ID, resources, environment activation, stdout/stderr paths, and terminal status.
+
+After every completed download, preprocessing call, or batch stage, append a record to the project's existing log/provenance location. If none exists, use `output/logs/YYYYMMDD-HHMM-<task>.md`. Record source and inputs, software environment, direct/Slurm decision, commands or request payload, parameters, outputs, checksums when appropriate, validation, deviations, and status. Redact credentials, tokens, cookies, and signed URLs. If files cannot be written, return the same record explicitly in the response.
+
 ## Validation gate
 
 Check at least:
@@ -60,3 +71,4 @@ Return:
 - expected versus actual size
 - any credentials, quota, or access blocker
 - the next processing step only when requested
+- processing record, including scheduler job IDs when used
