@@ -1,0 +1,4 @@
+interface:
+  display_name: "MetForge Figure"
+  short_description: "Build and audit atmospheric science figures"
+  default_prompt: "Use $metforge-figure to design, create, and audit this atmospheric science figure."

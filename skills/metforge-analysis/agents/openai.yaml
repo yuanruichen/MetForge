@@ -1,0 +1,4 @@
+interface:
+  display_name: "MetForge Analysis"
+  short_description: "Diagnose atmospheric dynamics and numerical tests"
+  default_prompt: "Use $metforge-analysis to analyze this atmospheric dynamics experiment and identify the next decisive diagnostic."

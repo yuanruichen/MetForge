@@ -1,0 +1,4 @@
+interface:
+  display_name: "MetForge Data"
+  short_description: "Download and prepare atmospheric datasets reproducibly"
+  default_prompt: "Use $metforge-data to obtain and prepare the atmospheric data needed for this analysis."
