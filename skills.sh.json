@@ -1,0 +1,14 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "groupings": [
+    {
+      "title": "Atmospheric Science",
+      "skills": [
+        "metforge-data",
+        "metforge-analysis",
+        "metforge-figure",
+        "metforge-model-diagnose"
+      ]
+    }
+  ]
+}
