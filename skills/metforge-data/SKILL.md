@@ -1,6 +1,6 @@
 ---
 name: metforge-data
-description: Acquire and prepare atmospheric, climate, and Earth-system datasets reproducibly. Use when Codex needs to find an authoritative dataset, choose among ERA5/CMIP/GPM/MERRA-2/NOAA or similar products, download or subset NetCDF/GRIB/Zarr data, write CDS/Earthdata/ESGF/OPeNDAP acquisition code, inspect coordinates and metadata, estimate request size, preserve raw inputs, or create a provenance manifest for later analysis. Also use for xarray/dask preprocessing when data acquisition and dataset integrity are central to the task.
+description: Acquire and prepare atmospheric, climate, and Earth-system datasets reproducibly. Use when the agent needs to find an authoritative dataset, choose among ERA5/CMIP/GPM/MERRA-2/NOAA or similar products, download or subset NetCDF/GRIB/Zarr data, write CDS/Earthdata/ESGF/OPeNDAP acquisition code, inspect coordinates and metadata, estimate request size, preserve raw inputs, or create a provenance manifest for later analysis. Also use for xarray/dask preprocessing when data acquisition and dataset integrity are central to the task.
 license: MIT
 metadata:
   author: yuanruichen
