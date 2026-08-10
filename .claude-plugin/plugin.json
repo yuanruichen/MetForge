@@ -1,0 +1,21 @@
+{
+  "name": "metforge",
+  "displayName": "MetForge",
+  "description": "Atmospheric science skills for data acquisition, scientific analysis, publication-ready figures, and model diagnostics.",
+  "version": "2026.8.10",
+  "author": {
+    "name": "Yuanrui Chen",
+    "url": "https://github.com/yuanruichen"
+  },
+  "homepage": "https://github.com/yuanruichen/MetForge",
+  "repository": "https://github.com/yuanruichen/MetForge",
+  "license": "MIT",
+  "keywords": [
+    "atmospheric-science",
+    "climate-science",
+    "meteorology",
+    "scientific-computing",
+    "data-visualization",
+    "model-diagnostics"
+  ]
+}

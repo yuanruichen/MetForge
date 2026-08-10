@@ -8,17 +8,19 @@
   <a href="https://github.com/yuanruichen/MetForge/releases/latest"><img alt="release" src="https://img.shields.io/badge/release-v2026.7.10-orange"></a>
   <a href="https://opensource.org/license/mit"><img alt="license" src="https://img.shields.io/badge/license-MIT-black"></a>
   <img alt="Codex" src="https://img.shields.io/badge/agent-Codex-111111">
+  <img alt="Claude Code" src="https://img.shields.io/badge/agent-Claude_Code-D97757">
+  <img alt="Hermes" src="https://img.shields.io/badge/agent-Hermes-4B5CC4">
 </p>
 
 <p align="center">
   English · <a href="README_ZH.md">简体中文</a>
 </p>
 
-MetForge is a small collection of reusable skills for atmospheric-science work. It adds domain judgment for acquiring data, scientific calculations, figure design, and atmospheric-model diagnosis while leaving general planning, coding, tool use, and context management to the host agent.
+MetForge is a small collection of reusable skills for atmospheric-science work. It adds domain judgment for acquiring data, scientific calculations, figure design, and atmospheric-model diagnosis while leaving general planning, coding, tool use, and context management to the host agent. The same `skills/` source works across Codex, Claude Code, and Hermes.
 
 ## Quick Start
 
-After installation, describe the scientific task naturally or name a skill explicitly. These prompts can be copied directly:
+After installation, describe the scientific task naturally or name a skill explicitly. Codex uses `$metforge-data`, Claude Code uses `/metforge:metforge-data`, and Hermes uses `/metforge-data`; natural-language activation also works. These prompts can be copied directly:
 
 | Scenario | Prompt |
 |---|---|
@@ -42,7 +44,9 @@ After installation, describe the scientific task naturally or name a skill expli
 
 Each directory under `skills/` is an independent installable unit. The skills may cooperate, but none requires a central orchestrator.
 
-## Install for Codex
+## Install
+
+### Codex
 
 Clone the repository and sync all skills:
 
@@ -60,6 +64,36 @@ scripts/install-codex-skills.sh --check
 
 By default the installer uses `${CODEX_HOME:-$HOME/.codex}/skills`. Use `--dest PATH` to install elsewhere.
 
+### Claude Code
+
+Register this repository as a marketplace, then install the MetForge plugin:
+
+```text
+/plugin marketplace add yuanruichen/MetForge
+/plugin install metforge@metforge
+```
+
+Claude Code discovers all four skills from the shared `skills/` directory. They are available as `/metforge:metforge-data`, `/metforge:metforge-analysis`, `/metforge:metforge-figure`, and `/metforge:metforge-model-diagnose`.
+
+### Hermes
+
+Add MetForge as a public Skills Hub tap:
+
+```bash
+hermes skills tap add yuanruichen/MetForge
+```
+
+Install the skills directly from GitHub:
+
+```bash
+hermes skills install yuanruichen/MetForge/skills/metforge-data
+hermes skills install yuanruichen/MetForge/skills/metforge-analysis
+hermes skills install yuanruichen/MetForge/skills/metforge-figure
+hermes skills install yuanruichen/MetForge/skills/metforge-model-diagnose
+```
+
+Hermes treats third-party taps as community sources and security-scans skills during installation.
+
 ## Design principles
 
 - Domain judgment over agent orchestration.
@@ -71,4 +105,4 @@ By default the installer uses `${CODEX_HOME:-$HOME/.codex}/skills`. Use `--dest 
 - Figures are scientific arguments and are inspected after export.
 - Claims are separated into evidence, interpretation, and unresolved uncertainty.
 
-Claude Code and Hermes adapters can be added later without changing the core skill directories.
+Codex, Claude Code, and Hermes share the same skill directories; platform-specific files contain distribution metadata only.

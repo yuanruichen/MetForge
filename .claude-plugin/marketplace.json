@@ -1,0 +1,36 @@
+{
+  "name": "metforge",
+  "owner": {
+    "name": "Yuanrui Chen",
+    "url": "https://github.com/yuanruichen"
+  },
+  "description": "Atmospheric science skills for Claude Code.",
+  "version": "2026.8.10",
+  "plugins": [
+    {
+      "name": "metforge",
+      "displayName": "MetForge",
+      "source": {
+        "source": "github",
+        "repo": "yuanruichen/MetForge"
+      },
+      "description": "Atmospheric science skills for data acquisition, scientific analysis, publication-ready figures, and model diagnostics.",
+      "version": "2026.8.10",
+      "author": {
+        "name": "Yuanrui Chen",
+        "url": "https://github.com/yuanruichen"
+      },
+      "homepage": "https://github.com/yuanruichen/MetForge",
+      "repository": "https://github.com/yuanruichen/MetForge",
+      "license": "MIT",
+      "category": "science",
+      "tags": [
+        "atmospheric-science",
+        "climate-science",
+        "meteorology",
+        "scientific-computing",
+        "ai-for-science"
+      ]
+    }
+  ]
+}

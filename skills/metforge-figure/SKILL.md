@@ -1,6 +1,11 @@
 ---
 name: metforge-figure
 description: Design, create, revise, and audit atmospheric-science figures. Use for maps, map differences, vertical sections, Hovmöller diagrams, profiles, spectra, budgets, convergence plots, conservation/error-growth diagnostics, ensemble comparisons, and publication multi-panel figures from NetCDF/xarray or tabular data. Also use when Codex must inspect an existing figure or plotting script for scientific clarity, comparable scales, units, color choices, statistical overlays, layout, provenance, or export quality. Combines MetForge's former plot and figure-audit workflows into one evidence-first loop.
+license: MIT
+metadata:
+  author: yuanruichen
+  version: "2026.8.10"
+  tags: "atmospheric-science, scientific-visualization, matplotlib, cartopy"
 ---
 
 # MetForge Figure
