@@ -1,6 +1,6 @@
 ---
 name: metforge-model-diagnose
-description: Diagnose atmospheric-model and dynamical-core experiments. Use for idealized tests, balanced flow, hydrostatic rest, density currents, advection, gravity/acoustic waves, mountain waves, baroclinic instability, conservation and budget closure, error growth, convergence, timestep/resolution/domain/MPI sensitivity, solver comparisons, and physical-consistency failures. Also use when Codex must design the smallest experiment that distinguishes discretization error, round-off, solver behavior, configuration differences, parallel decomposition, and genuine physical response. Not for general indices, trends, filtering, EOFs, regression, or composites; use metforge-analysis for those calculations.
+description: Diagnose atmospheric-model and dynamical-core experiments. Use for idealized tests, balanced flow, hydrostatic rest, density currents, advection, gravity/acoustic waves, mountain waves, baroclinic instability, conservation and budget closure, error growth, convergence, timestep/resolution/domain/MPI sensitivity, solver comparisons, and physical-consistency failures. Also use when the agent must design the smallest experiment that distinguishes discretization error, round-off, solver behavior, configuration differences, parallel decomposition, and genuine physical response. Not for general indices, trends, filtering, EOFs, regression, or composites; use metforge-analysis for those calculations.
 license: MIT
 metadata:
   author: yuanruichen
