@@ -1,6 +1,6 @@
 ---
 name: metforge-analysis
-description: Perform reproducible atmospheric-science calculations and statistical diagnostics. Use when Codex needs to calculate established or custom climate indices, derive meteorological variables, compute trends, detrend or filter time series, perform EOF/PCA, regression, correlation, composites, bootstrap or significance tests, or build coordinate-aware xarray workflows from NetCDF/GRIB/Zarr data. Prefer validated implementations from MetPy, xarray, SciPy, statsmodels, xclim, xeofs/eofs, xskillscore, or another established package before implementing formulas manually. Not for diagnosing why a numerical model or dynamical-core test fails; use metforge-model-diagnose for that.
+description: Perform reproducible atmospheric-science calculations and statistical diagnostics. Use when the agent needs to calculate established or custom climate indices, derive meteorological variables, compute trends, detrend or filter time series, perform EOF/PCA, regression, correlation, composites, bootstrap or significance tests, or build coordinate-aware xarray workflows from NetCDF/GRIB/Zarr data. Prefer validated implementations from MetPy, xarray, SciPy, statsmodels, xclim, xeofs/eofs, xskillscore, or another established package before implementing formulas manually. Not for diagnosing why a numerical model or dynamical-core test fails; use metforge-model-diagnose for that.
 license: MIT
 metadata:
   author: yuanruichen
