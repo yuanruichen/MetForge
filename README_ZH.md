@@ -7,6 +7,7 @@
 <p align="center">
   <a href="https://github.com/yuanruichen/MetForge/releases/latest"><img alt="release" src="https://img.shields.io/badge/release-v2026.7.10-orange"></a>
   <a href="https://opensource.org/license/mit"><img alt="license" src="https://img.shields.io/badge/license-MIT-black"></a>
+  <a href="https://skills.sh/yuanruichen/metforge"><img alt="skills.sh" src="https://skills.sh/b/yuanruichen/metforge"></a>
   <img alt="Codex" src="https://img.shields.io/badge/agent-Codex-111111">
   <img alt="Claude Code" src="https://img.shields.io/badge/agent-Claude_Code-D97757">
   <img alt="Hermes" src="https://img.shields.io/badge/agent-Hermes-4B5CC4">
