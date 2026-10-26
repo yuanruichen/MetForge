@@ -17,7 +17,7 @@
   <a href="README.md">English</a> · 简体中文
 </p>
 
-MetForge 是一组轻量、可复用的大气科学技能，为智能体补充数据获取、科学计算、科研绘图和数值模式诊断所需的领域判断，同时把通用任务规划、代码编写、工具调用和上下文管理交给宿主智能体。同一份 `skills/` 源码可用于 Codex、Claude Code 和 Hermes。
+MetForge 是一组轻量、可复用的大气科学技能，为智能体补充科学问题与证据设计、数据获取、科学计算、科研绘图和数值模式诊断所需的领域判断，同时把通用任务规划、代码编写、工具调用和上下文管理交给宿主智能体。同一份 `skills/` 源码可用于 Codex、Claude Code 和 Hermes。
 
 ## 快速开始
 
@@ -25,6 +25,7 @@ MetForge 是一组轻量、可复用的大气科学技能，为智能体补充�
 
 | 使用场景 | 提示词 |
 |---|---|
+| 逐步确定科研项目 | `使用 $metforge-project，结合我的笔记，通过问答明确 spcz-moist-margin 项目，并维护 doc/core/research/spcz-moist-margin/ 下的 proj.md 和 log.md。每次先问一个关键问题。` |
 | 下载再分析资料 | `使用 $metforge-data 下载 DJFM 2000–2020、10°S–10°N、80°E–180°E 的 ERA5 850 hPa 逐小时 u、v 风场。先验证一个月，再扩展到完整时段。` |
 | 检查和预处理本地数据 | `使用 $metforge-data 检查这些 NetCDF 文件的坐标、单位、日历和缺测值，并设计一个内存安全的 xarray 预处理脚本。` |
 | 计算大气科学指数 | `使用 $metforge-analysis 计算 SPCZ 强度和倾角指数；运行前明确区域、权重、基准期、单位和验证方法。` |
@@ -38,12 +39,25 @@ MetForge 是一组轻量、可复用的大气科学技能，为智能体补充�
 
 | 技能 | 适用任务 | 示例 |
 |---|---|---|
+| [`metforge-project`](skills/metforge-project/SKILL.md) | 通过问答澄清科学问题与假设，创建、继续和更新 `proj.md` / `log.md` | “使用 `$metforge-project`，把这个研究想法逐步整理成简洁的项目核心。” |
 | [`metforge-data`](skills/metforge-data/SKILL.md) | 查找、下载、裁剪、验证并记录大气科学数据 | “使用 `$metforge-data` 下载该区域的 ERA5 逐小时风场。” |
 | [`metforge-analysis`](skills/metforge-analysis/SKILL.md) | 计算指数、气象诊断变量、趋势、滤波、EOF、回归和合成 | “使用 `$metforge-analysis` 计算该环流指数及其趋势。” |
 | [`metforge-figure`](skills/metforge-figure/SKILL.md) | 设计、生成、修改和审查大气科学图件 | “使用 `$metforge-figure` 将平衡流试验结果整理为可发表的对比图。” |
 | [`metforge-model-diagnose`](skills/metforge-model-diagnose/SKILL.md) | 诊断动力框架、理想试验、平衡、守恒、收敛和误差增长 | “使用 `$metforge-model-diagnose` 判断平衡流试验为何随积分时间漂移。” |
 
 `skills/` 下的每个目录都是可独立安装的技能。技能可以按需协作，但不依赖中央调度器。
+
+## 科研项目文档
+
+`metforge-project` 通过少量、有针对性的问题逐步收敛研究设计，区分文献发现、直接观测、当前假设和科学解释。已有项目笔记会直接复用；尚未决定的选择明确保留，不代替研究者作答。
+
+```text
+使用 $metforge-project，根据这些笔记开始 spcz-moist-margin 项目。每轮先问一个关键问题。
+使用 $metforge-project，读取 spcz-moist-margin 的项目文档，从上次的未决问题继续问答。
+使用 $metforge-project 更新 spcz-moist-margin：根据这份新证据追加 log.md，重新评估 H1，并修订 proj.md 中受影响的判断和计划。
+```
+
+文档放在实际科研仓库的 `doc/core/research/<projname>/`：`proj.md` 保留简洁的当前核心，`log.md` 追加有日期的证据与决策。实质性讨论节点会保存草案和下一问题，方便跨会话继续。确认研究计划不等于验证假设；没有真实证据的初始化不会生成实验结果。具体运行过程仍记录在项目原有的日志或溯源位置。
 
 ## 安装
 
@@ -65,6 +79,18 @@ scripts/install-codex-skills.sh --check
 
 安装脚本默认写入 `${CODEX_HOME:-$HOME/.codex}/skills`。可以使用 `--dest PATH` 指定其他目录。
 
+#### 更新已有 Codex 安装
+
+在现有 MetForge checkout 的 `main` 分支中执行：
+
+```bash
+git pull --ff-only origin main
+scripts/install-codex-skills.sh
+scripts/install-codex-skills.sh --check
+```
+
+这些命令会拉取最新源码、同步全部技能（包括新增技能），并检查已安装副本是否一致。若最初使用了 `--dest PATH`，两条安装器命令也应带上相同选项。自定义修改应保留在源码 checkout 中，同步会替换受管理的已安装副本。如果本地改动导致 Git 无法快进，请先合并这些改动再重试；更新不会重置你的工作。若新技能尚未显示，重新打开智能体会话。
+
 ### Claude Code
 
 将该仓库注册为 Marketplace，然后安装 MetForge 插件：
@@ -74,7 +100,7 @@ scripts/install-codex-skills.sh --check
 /plugin install metforge@metforge
 ```
 
-Claude Code 会从共享的 `skills/` 目录发现四个技能，对应命令为 `/metforge:metforge-data`、`/metforge:metforge-analysis`、`/metforge:metforge-figure` 和 `/metforge:metforge-model-diagnose`。
+Claude Code 会从共享的 `skills/` 目录发现五个技能，对应命令为 `/metforge:metforge-project`、`/metforge:metforge-data`、`/metforge:metforge-analysis`、`/metforge:metforge-figure` 和 `/metforge:metforge-model-diagnose`。
 
 ### Hermes
 
@@ -87,6 +113,7 @@ hermes skills tap add yuanruichen/MetForge
 也可以直接从 GitHub 安装各个技能：
 
 ```bash
+hermes skills install yuanruichen/MetForge/skills/metforge-project
 hermes skills install yuanruichen/MetForge/skills/metforge-data
 hermes skills install yuanruichen/MetForge/skills/metforge-analysis
 hermes skills install yuanruichen/MetForge/skills/metforge-figure

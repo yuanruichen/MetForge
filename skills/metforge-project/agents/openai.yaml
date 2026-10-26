@@ -1,0 +1,4 @@
+interface:
+  display_name: "MetForge Project"
+  short_description: "Develop research questions, project cores, and logs"
+  default_prompt: "Use $metforge-project to develop or resume my research project through focused questions, then maintain a concise proj.md and an evidence-based log.md."

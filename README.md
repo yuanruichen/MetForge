@@ -17,7 +17,7 @@
   English · <a href="README_ZH.md">简体中文</a>
 </p>
 
-MetForge is a small collection of reusable skills for atmospheric-science work. It adds domain judgment for acquiring data, scientific calculations, figure design, and atmospheric-model diagnosis while leaving general planning, coding, tool use, and context management to the host agent. The same `skills/` source works across Codex, Claude Code, and Hermes.
+MetForge is a small collection of reusable skills for atmospheric-science work. It adds domain judgment for research questions and evidence, data acquisition, scientific calculations, figure design, and atmospheric-model diagnosis while leaving general task planning, coding, tool use, and context management to the host agent. The same `skills/` source works across Codex, Claude Code, and Hermes.
 
 ## Quick Start
 
@@ -25,6 +25,7 @@ After installation, describe the scientific task naturally or name a skill expli
 
 | Scenario | Prompt |
 |---|---|
+| Develop a research project | `Use $metforge-project to develop spcz-moist-margin through focused questions, then maintain doc/core/research/spcz-moist-margin/proj.md and log.md. Start from my notes and ask one key question at a time.` |
 | Download reanalysis data | `Use $metforge-data to download ERA5 hourly u and v at 850 hPa for 10°S–10°N, 80°E–180°E during DJFM 2000–2020. Validate one month before scaling up.` |
 | Inspect and prepare local data | `Use $metforge-data to inspect these NetCDF files, verify coordinates, units, calendar, and missing values, then design a memory-safe xarray preprocessing script.` |
 | Calculate an atmospheric index | `Use $metforge-analysis to calculate this SPCZ intensity and orientation index. State the exact domain, weighting, baseline, units, and validation before running it.` |
@@ -38,12 +39,25 @@ After installation, describe the scientific task naturally or name a skill expli
 
 | Skill | Use it for | Example |
 |---|---|---|
+| [`metforge-project`](skills/metforge-project/SKILL.md) | Clarify research questions and hypotheses through dialogue; create, resume, and update `proj.md` and `log.md` | “Use `$metforge-project` to turn this research idea into a concise project core.” |
 | [`metforge-data`](skills/metforge-data/SKILL.md) | Find, download, subset, validate, and document atmospheric datasets | “Use `$metforge-data` to download ERA5 hourly winds for this domain.” |
 | [`metforge-analysis`](skills/metforge-analysis/SKILL.md) | Calculate indices, meteorological diagnostics, trends, filters, EOFs, regression, and composites | “Use `$metforge-analysis` to calculate this circulation index and its trend.” |
 | [`metforge-figure`](skills/metforge-figure/SKILL.md) | Design, create, revise, and audit atmospheric-science figures | “Use `$metforge-figure` to turn these balance-test outputs into a publication-ready comparison.” |
 | [`metforge-model-diagnose`](skills/metforge-model-diagnose/SKILL.md) | Diagnose dynamical-core tests, numerical experiments, balance, conservation, convergence, and error growth | “Use `$metforge-model-diagnose` to determine why the balanced-flow experiment drifts.” |
 
 Each directory under `skills/` is an independent installable unit. The skills may cooperate, but none requires a central orchestrator.
+
+## Research project documents
+
+`metforge-project` develops the scientific design through a short, adaptive interview. It separates literature, observations, hypotheses, and interpretation. Existing project notes are reused; unresolved choices remain visible until the researcher settles them.
+
+```text
+Use $metforge-project to start a project named spcz-moist-margin from these notes. Ask one key question at a time.
+Use $metforge-project to resume spcz-moist-margin from its documents and continue the next open question.
+Use $metforge-project to update spcz-moist-margin from this new evidence: append log.md, reassess H1, and revise the affected parts of proj.md.
+```
+
+The documents belong in the active research repository at `doc/core/research/<projname>/`: `proj.md` holds the concise current core, and `log.md` retains dated evidence and decisions. Meaningful checkpoints save the draft and next question for later sessions. Confirmation of the plan does not verify its hypotheses; initialization records no experimental results unless actual evidence was provided. Detailed execution records stay in the project's existing provenance location.
 
 ## Install
 
@@ -65,6 +79,18 @@ scripts/install-codex-skills.sh --check
 
 By default the installer uses `${CODEX_HOME:-$HOME/.codex}/skills`. Use `--dest PATH` to install elsewhere.
 
+#### Update an existing Codex installation
+
+Run these commands from your existing MetForge checkout on `main`:
+
+```bash
+git pull --ff-only origin main
+scripts/install-codex-skills.sh
+scripts/install-codex-skills.sh --check
+```
+
+This fetches the latest source, syncs every skill (including newly added skills), and verifies the installed copies. If you originally used `--dest PATH`, pass the same option to both installer commands. Keep custom changes in the source checkout: syncing replaces managed installed copies. If Git cannot fast-forward because of local changes, reconcile them before retrying; the update does not reset your work. If a new skill is not visible, open a new agent conversation.
+
 ### Claude Code
 
 Register this repository as a marketplace, then install the MetForge plugin:
@@ -74,7 +100,7 @@ Register this repository as a marketplace, then install the MetForge plugin:
 /plugin install metforge@metforge
 ```
 
-Claude Code discovers all four skills from the shared `skills/` directory. They are available as `/metforge:metforge-data`, `/metforge:metforge-analysis`, `/metforge:metforge-figure`, and `/metforge:metforge-model-diagnose`.
+Claude Code discovers all five skills from the shared `skills/` directory. They are available as `/metforge:metforge-project`, `/metforge:metforge-data`, `/metforge:metforge-analysis`, `/metforge:metforge-figure`, and `/metforge:metforge-model-diagnose`.
 
 ### Hermes
 
@@ -87,6 +113,7 @@ hermes skills tap add yuanruichen/MetForge
 Install the skills directly from GitHub:
 
 ```bash
+hermes skills install yuanruichen/MetForge/skills/metforge-project
 hermes skills install yuanruichen/MetForge/skills/metforge-data
 hermes skills install yuanruichen/MetForge/skills/metforge-analysis
 hermes skills install yuanruichen/MetForge/skills/metforge-figure
