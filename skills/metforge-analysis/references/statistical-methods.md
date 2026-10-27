@@ -1,5 +1,7 @@
 # Atmospheric statistical methods
 
+Complete the [published-method gate](method-provenance.md) before selecting a statistical diagnostic. Standard software or a familiar statistical operation does not establish its scientific applicability. Record sources for any added statistical procedure and explain adaptations; do not select a procedure because it produces a desired pattern.
+
 ## EOF/PCA
 
 - Define the anomaly field, time/space domain, missing mask, and whether covariance or correlation EOFs are intended.
@@ -30,3 +32,7 @@
 ## General validation
 
 Use synthetic or shuffled data to verify false-positive behavior, dimensional alignment, lag direction, and normalization. Save random seeds and resampling settings. Prefer effect sizes and uncertainty intervals over a binary significance mask alone.
+
+## Shared-variable decompositions
+
+Check whether components and their reference total share variables or definitions. A normalized covariance allocation that sums to one by construction is not independent evidence of physical source attribution, opposing forcings, or a closed feedback loop. Negative or greater-than-one terms are not independent variance fractions. Use such a scientific diagnostic only when a matched published method supports the actual target and interpretation; algebraic correctness or high correlation does not pass the method gate.

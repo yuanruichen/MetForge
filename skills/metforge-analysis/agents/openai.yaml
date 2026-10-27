@@ -1,4 +1,4 @@
 interface:
   display_name: "MetForge Analysis"
-  short_description: "Compute atmospheric diagnostics and statistics"
-  default_prompt: "Use $metforge-analysis to calculate the requested atmospheric indices, trends, filters, and statistical diagnostics reproducibly."
+  short_description: "Literature-grounded atmospheric diagnostics"
+  default_prompt: "Use $metforge-analysis to establish a published method matched to the scientific question before computation. Reproduce it or make small documented adaptations. Search the literature if needed; if no applicable method is established, stop and report the blocker instead of inventing a diagnostic."

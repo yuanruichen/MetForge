@@ -1,5 +1,7 @@
 # Trends and filtering
 
+First complete the [published-method record](method-provenance.md) for the trend model or filtering/statistical workflow. Library defaults and numerical response tests do not substitute for a published method matched to the scientific target.
+
 ## Trend contract
 
 State the fitted model, time coordinate, units, period, seasonal sampling, missing-data rule, and uncertainty method. Report slopes in physically interpretable units such as `K decade-1`, not index steps.
@@ -20,7 +22,7 @@ Record filter family, cutoff periods, order/window length, sampling interval, de
 - Decide whether to remove the mean and trend before filtering; document the order.
 - Use `scipy.signal` for validated digital filters, xarray rolling/coarsening for transparent window operations, and statsmodels LOWESS when nonlinear smoothing is intended.
 - Use zero-phase filtering only when a non-causal diagnostic is acceptable and disclose it.
-- Inspect the frequency response and an impulse/synthetic-signal test for custom filters.
+- Inspect the frequency response and an impulse/synthetic-signal test for the selected filter implementation or adapted settings; these checks do not authorize inventing a new scientific filter method.
 - Mask or flag contaminated edge intervals rather than presenting them as equally reliable.
 
 ## Output checks

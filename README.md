@@ -47,6 +47,12 @@ After installation, describe the scientific task naturally or name a skill expli
 
 Each directory under `skills/` is an independent installable unit. The skills may cooperate, but none requires a central orchestrator.
 
+## Literature-grounded analysis
+
+Before scientific computation, metforge-analysis requires a published method matched to the question and intended interpretation, with the actual method section/equation verified. Only small, documented adaptations are allowed. A standard formula or software package does not justify an otherwise unsupported diagnostic or physical attribution.
+
+When project references are insufficient, search the literature. If no applicable method or necessary methodological detail can be established, stop that analysis and report the search, missing evidence, and work not run. Do not invent a replacement to keep producing results. See the [method-provenance gate](skills/metforge-analysis/references/method-provenance.md).
+
 ## Research project documents
 
 `metforge-project` develops the scientific design through a short, adaptive interview. It separates literature, observations, hypotheses, and interpretation. Existing project notes are reused; unresolved choices remain visible until the researcher settles them.

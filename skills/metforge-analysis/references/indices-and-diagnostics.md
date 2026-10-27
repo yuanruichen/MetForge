@@ -1,5 +1,7 @@
 # Atmospheric indices and diagnostic variables
 
+Before selecting any index or derived diagnostic, complete the [published-method record](method-provenance.md). The common forms below are a vocabulary, not permission to invent an index without a matched published definition and scientific use.
+
 ## Index contract
 
 For every index, record:
