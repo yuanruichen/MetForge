@@ -15,6 +15,7 @@ these defaults.
 | Explanations | Segoe UI 20 pt; about 18 pt for compact annotations |
 | Subtitle / author | About 21 / 17 pt |
 | Captions | About 14 pt grey; units, period, method and source |
+| Line spacing | User requirement: at least 1.15× for all editable slide text, including titles, captions and tables; paragraph spacing is separate |
 | Comparisons | Matching geographic extent, scales and axis limits |
 | Color | Restrained accent; consistent with the scientific figure legends |
 

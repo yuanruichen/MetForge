@@ -54,6 +54,13 @@ simple charts and diagrams. When a host `slides` skill exists, use its authoring
 and layout checks; do not require that host-specific skill on other agents.
 Scientific maps/profiles may remain audited images. Do not flatten whole slides.
 
+Set line spacing to **at least 1.15×** for all editable slide text: titles, body,
+bullet lists, annotations, captions and table text. With PptxGenJS, explicitly use
+`lineSpacingMultiple: 1.15` or greater and omit a point-based `lineSpacing`
+override. Paragraph spacing is separate and cannot substitute for this minimum.
+If text no longer fits, enlarge or reflow the box, shorten wording without
+changing its meaning, or split the content across slides; retain the minimum.
+
 Resolve the template with [template_path.py](scripts/template_path.py): an explicit
 path or `METFORGE_PPT_TEMPLATE` takes priority over the registered default. A local
 optional `assets/Academic_Minimal_Final.potx` is also supported, but user templates
@@ -91,6 +98,8 @@ Render the actual final PPTX and inspect every page. Revise clipping, collisions
 unreadable axes, excess whitespace and crowded captions. Use host overlap/bounds
 checks where available; distinguish intentional containment from collisions.
 Verify numerical claims, slide-to-evidence links and package/template integrity.
+Check the 1.15× minimum in the final text paragraphs, including inherited or
+per-paragraph overrides (OOXML `a:lnSpc/a:spcPct` must be at least `115000`).
 
 Prefer native Office/LibreOffice previews. If an offline OOXML viewer is the
 viable fallback, disclose the engine and font substitution and identify a raster
