@@ -18,3 +18,9 @@ env/
 *.zarr/
 node_modules/
 package-lock.json
+
+# Private user presentation templates stay local.
+skills/metforge-ppt/assets/*.potx
+skills/metforge-ppt/assets/*.pptx
+.metforge-assets/
+skills/.metforge-assets/

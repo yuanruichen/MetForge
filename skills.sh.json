@@ -8,7 +8,8 @@
         "metforge-data",
         "metforge-analysis",
         "metforge-figure",
-        "metforge-model-diagnose"
+        "metforge-model-diagnose",
+        "metforge-ppt"
       ]
     }
   ]

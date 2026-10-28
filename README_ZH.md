@@ -43,6 +43,7 @@ MetForge 是一组轻量、可复用的大气科学技能，为智能体补充�
 | [`metforge-data`](skills/metforge-data/SKILL.md) | 查找、下载、裁剪、验证并记录大气科学数据 | “使用 `$metforge-data` 下载该区域的 ERA5 逐小时风场。” |
 | [`metforge-analysis`](skills/metforge-analysis/SKILL.md) | 计算指数、气象诊断变量、趋势、滤波、EOF、回归和合成 | “使用 `$metforge-analysis` 计算该环流指数及其趋势。” |
 | [`metforge-figure`](skills/metforge-figure/SKILL.md) | 设计、生成、修改和审查大气科学图件 | “使用 `$metforge-figure` 将平衡流试验结果整理为可发表的对比图。” |
+| [`metforge-ppt`](skills/metforge-ppt/SKILL.md) | 用模板将已验收阶段结果整理为可编辑学术汇报 | “使用 `$metforge-ppt` 汇总本阶段结果，保留方法、反例与未解问题。” |
 | [`metforge-model-diagnose`](skills/metforge-model-diagnose/SKILL.md) | 诊断动力框架、理想试验、平衡、守恒、收敛和误差增长 | “使用 `$metforge-model-diagnose` 判断平衡流试验为何随积分时间漂移。” |
 
 `skills/` 下的每个目录都是可独立安装的技能。技能可以按需协作，但不依赖中央调度器。
@@ -52,6 +53,12 @@ MetForge 是一组轻量、可复用的大气科学技能，为智能体补充�
 metforge-analysis 在科学计算前必须找到与当前问题和解释目标对应的已发表方法，核对原文中的方法章节、公式或操作定义；只允许保留方法定义、假设与解释范围的小幅改动，并明确记录差异。通用公式、已有软件包、数值闭合或图形效果，都不能替代具体诊断的方法依据。
 
 项目现有参考不足时，先检索文献；检索后仍无法建立适用方法或核实必要细节，就停止该项分析，报告检索记录、缺失依据和未执行的工作，而不是自创替代诊断继续计算或生成机制结论。详见[方法来源与停止条件](skills/metforge-analysis/references/method-provenance.md)。
+
+## 阶段成果汇报
+
+`metforge-analysis` 在一个完整分析阶段通过验收、产物和记录保存并核查后，调用 `metforge-ppt` 汇总该阶段结果。用户可跳过或指定其他输出；不会在每次小计算后生成 PPT，也不会用汇报绕过文献方法约束。制作汇报不增加科学证据。
+
+`metforge-ppt` 使用本地登记的学术模板、从汇报示例提取的版式规则，以及可复用的 OOXML 模板应用/完整性核查脚本。用户模板保留在本地，不随公开仓库分发；用 `python skills/metforge-ppt/scripts/template_path.py --register /path/to/template.potx` 登记默认模板。它存放在托管 skill 目录之外，常规更新会保留。默认一页一个结论，图占主体，少量解释，页脚注明方法和来源，结尾分开说明已知与待解问题。用户新模板优先；保留反例、空结果、采样限制和不确定性。交付可编辑 PPTX、可用的预览、讲稿与复现源文件，并说明渲染与字体限制。
 
 ## 科研项目文档
 
@@ -106,7 +113,7 @@ scripts/install-codex-skills.sh --check
 /plugin install metforge@metforge
 ```
 
-Claude Code 会从共享的 `skills/` 目录发现五个技能，对应命令为 `/metforge:metforge-project`、`/metforge:metforge-data`、`/metforge:metforge-analysis`、`/metforge:metforge-figure` 和 `/metforge:metforge-model-diagnose`。
+Claude Code 会从共享的 `skills/` 目录发现六个技能，对应命令为 `/metforge:metforge-project`、`/metforge:metforge-data`、`/metforge:metforge-analysis`、`/metforge:metforge-figure`、`/metforge:metforge-ppt` 和 `/metforge:metforge-model-diagnose`。
 
 ### Hermes
 
@@ -123,6 +130,7 @@ hermes skills install yuanruichen/MetForge/skills/metforge-project
 hermes skills install yuanruichen/MetForge/skills/metforge-data
 hermes skills install yuanruichen/MetForge/skills/metforge-analysis
 hermes skills install yuanruichen/MetForge/skills/metforge-figure
+hermes skills install yuanruichen/MetForge/skills/metforge-ppt
 hermes skills install yuanruichen/MetForge/skills/metforge-model-diagnose
 ```
 

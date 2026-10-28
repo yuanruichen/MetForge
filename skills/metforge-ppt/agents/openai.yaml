@@ -1,0 +1,4 @@
+interface:
+  display_name: "MetForge PPT"
+  short_description: "Template-based research stage presentations"
+  default_prompt: "Use $metforge-ppt to turn the completed analysis stage into an evidence-grounded presentation using the locally registered academic template."

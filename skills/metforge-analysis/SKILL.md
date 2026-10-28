@@ -4,7 +4,7 @@ description: Reproduce published atmospheric-science analysis methods or make sm
 license: MIT
 metadata:
   author: yuanruichen
-  version: "2026.8.10"
+  version: "2026.10.28"
   tags: "atmospheric-science, climate-science, scientific-computing, metpy, xarray, statistics"
 ---
 
@@ -54,6 +54,21 @@ Do not silently choose among competing index definitions. For a named index, rec
 6. Select direct execution or a scheduler using the rules below, then run the smallest valid calculation before scaling out.
 7. Validate dimensions, coordinates, units, numeric ranges, sample counts, missing-data propagation, and at least one independent or limiting-case check.
 8. Save self-describing outputs and append a processing record after each completed computation stage. Record meaningful method choices, adaptations, or blockers in the project's research log; update affected project statements after that entry.
+
+## Completed-stage presentation
+
+After a coherent analysis stage meets its agreed acceptance criteria and its
+outputs and research record are saved and validated, invoke `metforge-ppt` to
+summarize that stage with the locally registered academic template (or the user's chosen
+template). Pass the stage report, final figure/table manifests, exact methods
+and sampling, numerical findings, counterexamples, uncertainty and next test.
+Keep slide claims within the verified analysis; the deck adds no new evidence.
+
+This handoff occurs at a results milestone, not after every compute call. Honor
+the user's opt-out, pause, narrower task or requested output format. A blocked
+method or unfinished stage does not trigger a completed-results deck. If
+`metforge-ppt` is unavailable, report that limitation and return the evidence
+package; do not claim a deck was generated or install tools without authority.
 
 ## Scientific safeguards
 

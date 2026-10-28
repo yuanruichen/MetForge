@@ -17,7 +17,7 @@
   English · <a href="README_ZH.md">简体中文</a>
 </p>
 
-MetForge is a small collection of reusable skills for atmospheric-science work. It adds domain judgment for research questions and evidence, data acquisition, scientific calculations, figure design, and atmospheric-model diagnosis while leaving general task planning, coding, tool use, and context management to the host agent. The same `skills/` source works across Codex, Claude Code, and Hermes.
+MetForge is a small collection of reusable skills for atmospheric-science work. It adds domain judgment for research questions and evidence, data acquisition, scientific calculations, figure design, stage-result presentations, and atmospheric-model diagnosis while leaving general task planning, coding, tool use, and context management to the host agent. The same `skills/` source works across Codex, Claude Code, and Hermes.
 
 ## Quick Start
 
@@ -33,6 +33,7 @@ After installation, describe the scientific task naturally or name a skill expli
 | Design an atmospheric figure | `Use $metforge-figure to turn these MJO composite fields into a clear longitude–time figure with consistent scales, units, and propagation guides.` |
 | Audit an existing figure | `Use $metforge-figure to audit this multi-panel map for scientific comparability, color normalization, labels, projection artifacts, and export quality.` |
 | Diagnose a dynamical-core test | `Use $metforge-model-diagnose to determine why RMS error grows in this balanced-flow test and propose the smallest experiment that separates spatial imbalance from a growing computational mode.` |
+| Summarize a completed analysis stage | `Use $metforge-ppt to summarize this verified stage using the academic template, keeping the source figures, methods, counterexamples and unresolved questions visible.` |
 | Combine analysis and visualization | `Use $metforge-analysis to calculate the diagnostic fields and statistics, then use $metforge-figure only for the panels needed to support the conclusion.` |
 
 ## Skills
@@ -43,6 +44,7 @@ After installation, describe the scientific task naturally or name a skill expli
 | [`metforge-data`](skills/metforge-data/SKILL.md) | Find, download, subset, validate, and document atmospheric datasets | “Use `$metforge-data` to download ERA5 hourly winds for this domain.” |
 | [`metforge-analysis`](skills/metforge-analysis/SKILL.md) | Calculate indices, meteorological diagnostics, trends, filters, EOFs, regression, and composites | “Use `$metforge-analysis` to calculate this circulation index and its trend.” |
 | [`metforge-figure`](skills/metforge-figure/SKILL.md) | Design, create, revise, and audit atmospheric-science figures | “Use `$metforge-figure` to turn these balance-test outputs into a publication-ready comparison.” |
+| [`metforge-ppt`](skills/metforge-ppt/SKILL.md) | Summarize validated stage results in an editable, template-based research presentation | “Use `$metforge-ppt` to turn the completed P1 results into a group-meeting talk.” |
 | [`metforge-model-diagnose`](skills/metforge-model-diagnose/SKILL.md) | Diagnose dynamical-core tests, numerical experiments, balance, conservation, convergence, and error growth | “Use `$metforge-model-diagnose` to determine why the balanced-flow experiment drifts.” |
 
 Each directory under `skills/` is an independent installable unit. The skills may cooperate, but none requires a central orchestrator.
@@ -52,6 +54,12 @@ Each directory under `skills/` is an independent installable unit. The skills ma
 Before scientific computation, metforge-analysis requires a published method matched to the question and intended interpretation, with the actual method section/equation verified. Only small, documented adaptations are allowed. A standard formula or software package does not justify an otherwise unsupported diagnostic or physical attribution.
 
 When project references are insufficient, search the literature. If no applicable method or necessary methodological detail can be established, stop that analysis and report the search, missing evidence, and work not run. Do not invent a replacement to keep producing results. See the [method-provenance gate](skills/metforge-analysis/references/method-provenance.md).
+
+## Stage-result presentations
+
+At a coherent, validated analysis milestone, `metforge-analysis` hands the stage evidence to `metforge-ppt`, unless the user opts out or requests a narrower format. This happens after stage acceptance, not after every computation. The deck reuses verified outputs; it does not bypass the published-method gate or add new scientific evidence.
+
+`metforge-ppt` uses a locally registered academic template, a concise research-talk style profile, and tested OOXML template/integrity helpers. User-supplied templates remain private and are not distributed in this public repository. Register a local default with `python skills/metforge-ppt/scripts/template_path.py --register /path/to/template.potx`; it is stored outside managed skill folders and survives updates. It favors one finding per slide, large scientific evidence, short interpretation, source/method captions, and a clear established/unresolved ending. A user-supplied template takes precedence. Deliverables include editable PPTX, available preview, notes and reproducible sources. Renderer and font limitations are disclosed.
 
 ## Research project documents
 
@@ -106,7 +114,7 @@ Register this repository as a marketplace, then install the MetForge plugin:
 /plugin install metforge@metforge
 ```
 
-Claude Code discovers all five skills from the shared `skills/` directory. They are available as `/metforge:metforge-project`, `/metforge:metforge-data`, `/metforge:metforge-analysis`, `/metforge:metforge-figure`, and `/metforge:metforge-model-diagnose`.
+Claude Code discovers all six skills from the shared `skills/` directory. They are available as `/metforge:metforge-project`, `/metforge:metforge-data`, `/metforge:metforge-analysis`, `/metforge:metforge-figure`, `/metforge:metforge-ppt`, and `/metforge:metforge-model-diagnose`.
 
 ### Hermes
 
@@ -123,6 +131,7 @@ hermes skills install yuanruichen/MetForge/skills/metforge-project
 hermes skills install yuanruichen/MetForge/skills/metforge-data
 hermes skills install yuanruichen/MetForge/skills/metforge-analysis
 hermes skills install yuanruichen/MetForge/skills/metforge-figure
+hermes skills install yuanruichen/MetForge/skills/metforge-ppt
 hermes skills install yuanruichen/MetForge/skills/metforge-model-diagnose
 ```
 
